@@ -1,12 +1,24 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { api } from '../api/client';
 
-interface User {
+interface Membership {
+  tagNumber: number | null;
+  role: string;
+  club: {
+    name: string;
+    slug: string;
+    tagBadgeColor: string | null;
+    tagBadgeHighlightColor: string | null;
+  };
+}
+
+export interface User {
   id: number;
   name: string;
   email: string;
   iDiscGolfId: number;
   pdgaNumber: number | null;
+  membership: Membership | null;
 }
 
 interface AuthContextType {
@@ -35,12 +47,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const fetchUser = useCallback(async () => {
     try {
       const res = await api.getMe();
+      const d = res.data;
+      const m = d.memberships?.[0] ?? null;
       setUser({
-        id: res.data.id,
-        name: res.data.name,
-        email: res.data.email,
-        iDiscGolfId: res.data.iDiscGolfId,
-        pdgaNumber: res.data.pdgaNumber,
+        id: d.id,
+        name: d.name,
+        email: d.email,
+        iDiscGolfId: d.iDiscGolfId,
+        pdgaNumber: d.pdgaNumber,
+        membership: m ? {
+          tagNumber: m.tagNumber,
+          role: m.role,
+          club: {
+            name: m.club.name,
+            slug: m.club.slug,
+            tagBadgeColor: m.club.tagBadgeColor,
+            tagBadgeHighlightColor: m.club.tagBadgeHighlightColor,
+          },
+        } : null,
       });
     } catch {
       localStorage.removeItem('oauth_token');

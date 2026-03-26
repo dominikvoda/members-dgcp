@@ -84,7 +84,7 @@ const MembersPage: React.FC = () => {
                         <IconButton
                           size="small"
                           component="a"
-                          href={`https://www.idiscgolf.eu/player/${m.iDiscGolfId}`}
+                          href={`https://www.dgolf.cz/cs/players/${m.iDiscGolfId}/`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >

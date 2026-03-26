@@ -12,7 +12,7 @@ export default defineConfig({
         target: apiTarget,
         changeOrigin: true,
       },
-      '/oauth': {
+      '/oauth/token': {
         target: apiTarget,
         changeOrigin: true,
       },

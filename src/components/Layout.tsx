@@ -15,8 +15,8 @@ import {
   useTheme,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import HomeIcon from '@mui/icons-material/Home';
 import PeopleIcon from '@mui/icons-material/People';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import PersonIcon from '@mui/icons-material/Person';
 import { useAuth } from '../auth/AuthContext';
 import { useTranslation } from 'react-i18next';
@@ -33,15 +33,23 @@ const Layout: React.FC = () => {
   const { t } = useTranslation();
 
   const menuItems = [
+    { text: t('nav.home'), icon: <HomeIcon />, path: '/' },
     { text: t('nav.members'), icon: <PeopleIcon />, path: '/members' },
-    { text: t('nav.competitions'), icon: <EmojiEventsIcon />, path: '/souteze' },
     { text: t('nav.account'), icon: <PersonIcon />, path: '/ucet' },
   ];
 
   const drawer = (
     <Box>
-      <Toolbar>
-        <Typography variant="h6" noWrap>DGCP</Typography>
+      <Toolbar sx={{ gap: 1.5 }}>
+        <Box
+          component="img"
+          src="/dgcp-logo-white.png"
+          alt="DGCP"
+          sx={{ height: 32 }}
+        />
+        <Typography variant="h6" noWrap sx={{ fontWeight: 700 }}>
+          DGCP
+        </Typography>
       </Toolbar>
       <List>
         {menuItems.map((item) => (
@@ -63,18 +71,30 @@ const Layout: React.FC = () => {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <AppBar position="fixed" sx={{ zIndex: theme.zIndex.drawer + 1 }}>
+      <AppBar
+        position="fixed"
+        sx={{
+          zIndex: theme.zIndex.drawer + 1,
+          bgcolor: '#0d47a1',
+        }}
+      >
         <Toolbar>
           {isMobile && (
             <IconButton color="inherit" edge="start" onClick={() => setMobileOpen(!mobileOpen)} sx={{ mr: 2 }}>
               <MenuIcon />
             </IconButton>
           )}
-          <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
+          <Box
+            component="img"
+            src="/dgcp-logo-white.png"
+            alt="DGCP"
+            sx={{ height: 36, mr: 1.5, display: { xs: 'none', md: 'block' } }}
+          />
+          <Typography variant="h6" noWrap sx={{ flexGrow: 1, fontWeight: 700 }}>
             DGCP Members
           </Typography>
           {user && (
-            <Typography variant="body2">{user.name}</Typography>
+            <Typography variant="body2" sx={{ opacity: 0.85 }}>{user.name}</Typography>
           )}
         </Toolbar>
       </AppBar>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Box, CircularProgress, Alert, Button } from '@mui/material';
 import axios from 'axios';
@@ -11,8 +11,12 @@ const OAuthCallbackPage: React.FC = () => {
   const navigate = useNavigate();
   const { setTokenFromCallback } = useAuth();
   const { t } = useTranslation();
+  const exchangedRef = useRef(false);
 
   useEffect(() => {
+    if (exchangedRef.current) return;
+    exchangedRef.current = true;
+
     const exchangeCode = async () => {
       const code = searchParams.get('code');
       const state = searchParams.get('state');
@@ -36,12 +40,12 @@ const OAuthCallbackPage: React.FC = () => {
           grant_type: 'authorization_code',
           code,
           client_id: import.meta.env.VITE_OAUTH_CLIENT_ID,
-          client_secret: 'e2e_test_secret',
+          client_secret: import.meta.env.VITE_OAUTH_CLIENT_SECRET,
           redirect_uri: `${window.location.origin}/oauth/callback`,
         });
 
         await setTokenFromCallback(res.data.access_token);
-        navigate('/members', { replace: true });
+        navigate('/', { replace: true });
       } catch {
         setError(t('callback.exchangeFailed'));
       }

@@ -10,9 +10,15 @@
     "backToLogin": "Zpět na přihlášení"
   },
   "nav": {
+    "home": "Přehled",
     "members": "Členové",
-    "competitions": "Soutěže",
     "account": "Účet"
+  },
+  "home": {
+    "competitions": "Soutěže",
+    "profile": "Můj profil",
+    "membersDesc": "Zobrazit seznam členů klubu",
+    "role": "Role"
   },
   "members": {
     "title": "Členové",
@@ -21,7 +27,6 @@
     "loadError": "Nepodařilo se načíst seznam členů."
   },
   "competitions": {
-    "title": "Soutěže",
     "tagovacka": "Tagovačka",
     "tagovackaDesc": "Bag tag liga",
     "jamkovka": "Jamkovka",
