@@ -23,6 +23,7 @@
   "members": {
     "title": "Členové",
     "name": "Jméno",
+    "search": "Hledat člena...",
     "empty": "Žádní členové.",
     "loadError": "Nepodařilo se načíst seznam členů."
   },

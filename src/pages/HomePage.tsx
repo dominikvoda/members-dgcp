@@ -7,11 +7,10 @@ import {
   CardActionArea,
   Typography,
   Grid,
-  IconButton,
+  Chip,
   Divider,
   alpha,
 } from '@mui/material';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined';
 import AdjustOutlinedIcon from '@mui/icons-material/AdjustOutlined';
@@ -168,34 +167,42 @@ const HomePage: React.FC = () => {
 
               <Divider sx={{ my: 2 }} />
 
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <Typography variant="body2" color="text.secondary">dGolf</Typography>
-                  <IconButton
+              <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+                {user.iDiscGolfId && (
+                  <Chip
+                    label={`DGOLF #${user.iDiscGolfId}`}
                     size="small"
                     component="a"
                     href={`https://www.dgolf.cz/cs/players/${user.iDiscGolfId}/`}
                     target="_blank"
                     rel="noopener noreferrer"
-                  >
-                    <OpenInNewIcon fontSize="small" />
-                  </IconButton>
-                </Box>
+                    clickable
+                    sx={{
+                      fontWeight: 600,
+                      fontSize: '0.75rem',
+                      bgcolor: '#e8f5e9',
+                      color: '#2e7d32',
+                      '&:hover': { bgcolor: '#c8e6c9' },
+                    }}
+                  />
+                )}
                 {user.pdgaNumber && (
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <Typography variant="body2" color="text.secondary">
-                      PDGA #{user.pdgaNumber}
-                    </Typography>
-                    <IconButton
-                      size="small"
-                      component="a"
-                      href={`https://www.pdga.com/player/${user.pdgaNumber}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <OpenInNewIcon fontSize="small" />
-                    </IconButton>
-                  </Box>
+                  <Chip
+                    label={`PDGA #${user.pdgaNumber}`}
+                    size="small"
+                    component="a"
+                    href={`https://www.pdga.com/player/${user.pdgaNumber}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    clickable
+                    sx={{
+                      fontWeight: 600,
+                      fontSize: '0.75rem',
+                      bgcolor: '#e3f2fd',
+                      color: '#1565c0',
+                      '&:hover': { bgcolor: '#bbdefb' },
+                    }}
+                  />
                 )}
               </Box>
             </CardContent>

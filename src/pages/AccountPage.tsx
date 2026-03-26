@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Card, CardContent, Button, Divider } from '@mui/material';
+import { Box, Typography, Card, CardContent, Button, Divider, Chip } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useAuth } from '../auth/AuthContext';
 import { useTranslation } from 'react-i18next';
@@ -24,13 +24,43 @@ const AccountPage: React.FC = () => {
               <Typography variant="caption" color="text.secondary">Email</Typography>
               <Typography>{user.email}</Typography>
             </Box>
-            <Box>
-              <Typography variant="caption" color="text.secondary">iDiscGolf ID</Typography>
-              <Typography>{user.iDiscGolfId}</Typography>
-            </Box>
-            <Box>
-              <Typography variant="caption" color="text.secondary">{t('account.pdga')}</Typography>
-              <Typography>{user.pdgaNumber || '-'}</Typography>
+            <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+              {user.iDiscGolfId && (
+                <Chip
+                  label={`DGOLF #${user.iDiscGolfId}`}
+                  size="small"
+                  component="a"
+                  href={`https://www.dgolf.cz/cs/players/${user.iDiscGolfId}/`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  clickable
+                  sx={{
+                    fontWeight: 600,
+                    fontSize: '0.75rem',
+                    bgcolor: '#e8f5e9',
+                    color: '#2e7d32',
+                    '&:hover': { bgcolor: '#c8e6c9' },
+                  }}
+                />
+              )}
+              {user.pdgaNumber && (
+                <Chip
+                  label={`PDGA #${user.pdgaNumber}`}
+                  size="small"
+                  component="a"
+                  href={`https://www.pdga.com/player/${user.pdgaNumber}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  clickable
+                  sx={{
+                    fontWeight: 600,
+                    fontSize: '0.75rem',
+                    bgcolor: '#e3f2fd',
+                    color: '#1565c0',
+                    '&:hover': { bgcolor: '#bbdefb' },
+                  }}
+                />
+              )}
             </Box>
           </Box>
           <Divider sx={{ my: 3 }} />
