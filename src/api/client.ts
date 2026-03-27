@@ -29,6 +29,7 @@ apiClient.interceptors.response.use(
 export const api = {
   getMe: () => apiClient.get('/api/me'),
   getMembers: () => apiClient.get('/api/members'),
+  getUpcomingTournaments: () => apiClient.get('/api/tournaments/upcoming'),
 };
 
 export default apiClient;

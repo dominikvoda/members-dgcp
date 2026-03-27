@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Card,
@@ -11,13 +10,13 @@ import {
   Divider,
   alpha,
 } from '@mui/material';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined';
 import AdjustOutlinedIcon from '@mui/icons-material/AdjustOutlined';
 import LeaderboardOutlinedIcon from '@mui/icons-material/LeaderboardOutlined';
 import { useAuth } from '../auth/AuthContext';
 import { useTranslation } from 'react-i18next';
 import TagBadge from '../components/TagBadge';
+import UpcomingTournaments from '../components/UpcomingTournaments';
 
 const TAGOVACKA_PRIMARY = '#001645';
 const TAGOVACKA_ACCENT = '#db2228';
@@ -54,7 +53,6 @@ const competitions = [
 const HomePage: React.FC = () => {
   const { user } = useAuth();
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
   if (!user) return null;
 
@@ -109,34 +107,9 @@ const HomePage: React.FC = () => {
             ))}
           </Grid>
 
-          {/* Members link card */}
-          <Card
-            sx={{
-              mt: 2.5,
-              cursor: 'pointer',
-              border: '1px solid',
-              borderColor: 'divider',
-              boxShadow: 'none',
-              transition: 'all 0.2s ease',
-              '&:hover': {
-                borderColor: 'primary.main',
-                boxShadow: (theme) => `0 4px 20px ${alpha(theme.palette.primary.main, 0.12)}`,
-              },
-            }}
-            onClick={() => navigate('/members')}
-          >
-            <CardContent sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', py: 2, '&:last-child': { pb: 2 } }}>
-              <Box>
-                <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
-                  {t('nav.members')}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {t('home.membersDesc')}
-                </Typography>
-              </Box>
-              <ArrowForwardIcon sx={{ color: 'text.disabled' }} />
-            </CardContent>
-          </Card>
+          <Box sx={{ mt: 3 }}>
+            <UpcomingTournaments limit={8} />
+          </Box>
         </Grid>
 
         {/* Profile card */}

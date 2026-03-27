@@ -8,6 +8,7 @@ import OAuthCallbackPage from './pages/OAuthCallbackPage';
 import HomePage from './pages/HomePage';
 import MembersPage from './pages/MembersPage';
 import AccountPage from './pages/AccountPage';
+import TournamentsPage from './pages/TournamentsPage';
 import './i18n';
 
 const theme = createTheme({
@@ -32,6 +33,7 @@ function App() {
             <Route path="/oauth/callback" element={<OAuthCallbackPage />} />
             <Route element={<ProtectedRoute><Layout /></ProtectedRoute>}>
               <Route path="/" element={<HomePage />} />
+              <Route path="/turnaje" element={<TournamentsPage />} />
               <Route path="/members" element={<MembersPage />} />
               <Route path="/ucet" element={<AccountPage />} />
             </Route>
